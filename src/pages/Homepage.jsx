@@ -1,6 +1,10 @@
 import landingImage from '../assets/HeaderImage.jpg';
 import {TypeAnimation} from 'react-type-animation';
 import profile from '../assets/profile.jpg';
+import ChefGibbs from '../assets/ChefGibbs.png';
+import RetnaaDayok from '../assets/RetnaaDayok.png';
+import adeyemi from '../assets/adeyemi.png';
+import timi from '../assets/timi.png';
 import facebook from '../assets/facebook.png';
 import twitter from '../assets/twitter.png';
 import github from '../assets/github.png';
@@ -18,7 +22,8 @@ import left_arrow from '../assets/arrow_left.png';
 import right_arrow from '../assets/right_arrow.png';
 import call from '../assets/call.png';
 import mail from '../assets/mail.png';
-import { useState,useEffect } from 'react';
+import resumeLink from '../assets/Resume.pdf';
+import { useState} from 'react';
 import { Link } from 'react-router-dom';
 export default function HomePage(){
     const [dropDown, setDropDown] = useState(false);
@@ -102,41 +107,40 @@ export default function HomePage(){
       const navigateToInstagram = () => {
         window.location.href = 'https://www.instagram.com/ebube_john_enyi/';
       };
-
-      useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://smtpjs.com/v3/smtp.js';
-        script.async = true;
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
-    const sendEmail = (event) => {
-        event.preventDefault();
-
-        window.Email.send({
-            Host: "smtp.elasticemail.com",
-            Username: "ebubejohnenyi@gmail.com",
-            Password: "2822E8FAC461E4443B59510227FF7184DC66",
-            To: 'ebubejohnenyi@gmail.com',
-            From: document.getElementById('mail').value,
-            Subject: "New Contact Form Enquiry",
-            Body: "Name: " + document.getElementById('name').value
-                    + "<br> Email: " + document.getElementById('mail').value
-                    + "<br> Message: " + document.getElementById('message').value
-
-        }).then(
-            message => alert("Message Send Successfully")
-            // console.log("Hellooo")
-        ).catch(
-            error => console.error(error)
-        );
-    };
-
       
+      const downloadResume = (url) => {
+        const fileName = url.split("/").pop();
+        const resume = document.createElement("a");
+        resume.href = url;
+        resume.setAttribute('download', fileName);
+        document.body.appendChild(resume);
+        resume.click();
+        resume.remove();
+      }
+
+      const experienceValue = 2;
+      const happyClient = 20;
+      const projectDone = 10;
+      const award = 2;
+      let intervals = 500;
+
+      function startingCounting(){
+          let valueDisplays = document.querySelectorAll('.num');
+          valueDisplays.forEach((valueDisplay) => {
+            let startValue = 0;
+            let endValue = parseInt(valueDisplay.getAttribute("data-val"));
+            let duration = Math.floor(intervals / endValue);
+            let counter = setInterval(function () {
+                startValue += 1;
+                valueDisplay.textContent = startValue;
+                if(startValue == endValue){
+                    clearInterval(counter);
+                }
+            }, duration);
+          });
+      }
+      window.addEventListener('load', startingCounting);
+
     return(
         <>
         <section className="md:grid md:grid-cols-7 lg:grid lg:grid-cols-7">
@@ -223,8 +227,8 @@ export default function HomePage(){
                         <div className='p-4 md:flex lg:flex md:justify-center lg:justify-center'>
                             <div className='text-lg md:w-3/4 lg:w-3/4 sm:text-center md:text-left lg:text-left'>
                                 <h2 className="font-sans text-3xl font-bold">I'm <span className="text-green-500/50 md:text-4xl lg:text-4xl sm:text-3xl font-sans font-bold">Ebube John Enyi,</span> a Software Engineer</h2>
-                                <p className="mt-3 font-sans">I help you build brand for your business at an affordable price. Thousands of clients have procured exceptional results while working with our dedicated team. when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                <p className="mt-3 font-sans">Delivering work within time and budget which meets client’s requirements is our moto. Lorem Ipsum has been the industry's standard dummy text ever when an unknown printer took a galley.</p>
+                                <p className="mt-3 font-sans">Industrious, highly skilled and forward-looking Software Engineer with background in creating and executing innovative software solutions to enhance productivity, with 3years of Web Development. Committed to delivering innovative, robust and efficient solutions that drive company success.</p>
+                                <p className="mt-3 font-sans"> Proficient in UI/UX design, frontend and backend development, mobile app development, and data analysis, with a proven track record of exceeding client expectations and delivering exceptional results</p>
                             </div>
                             <div className='w-fit sm:mt-10 md:mt-0 lg:mt-0'>
                                 <div className="flex border-b-2 p-2">
@@ -244,25 +248,25 @@ export default function HomePage(){
                                     <p className="m-1 text-lg text-gray-500">UDI, Enugu State</p>
                                 </div>
                                 <div className="md:flex md:justify-center lg:flex lg:justify-center mt-5">
-                                    <button className="m-2 bg-green-500/85 shadow-xl text-white font-sans p-4 w-48 rounded-full hover:bg-green-400/85 transition-all ">Download CV</button>
+                                    <button className="m-2 bg-green-500/85 shadow-xl text-white font-sans p-4 w-48 rounded-full hover:bg-green-400/85 transition-all" onClick={() => {downloadResume(resumeLink)}}>Download CV</button>
                                 </div>
                             </div>
                         </div>
                         <div className='grid sm:grid-cols-2 justify-items-center md:grid-cols-4 lg:grid-cols-4 m-10'>
                             <div className="text-center border-r sm:border-b md:border-b-0 lg:border-b-0 pb-5 border-gray-300 sm:w-40 md:w-56 lg:w-56">
-                                <h1 className='text-6xl font-mono text-gray-400'>2+</h1>
+                                <h1 className='num text-6xl font-mono text-gray-400' data-val={experienceValue}>0</h1>
                                 <p className="aboutMe_text">Year Experience</p>
                             </div>
                             <div className="text-center sm:border-b md:border-b-0 lg:border-b-0 md:border-r pb-5 border-gray-300 sm:w-40 md:w-56 lg:w-56">
-                                <h1 className='text-6xl font-mono text-gray-400'>20+</h1>
+                                <h1 className='num text-6xl font-mono text-gray-400' data-val={happyClient}>0</h1>
                                 <p className="aboutMe_text">Happy Clients</p>
                             </div>
                             <div className="text-center border-r pb-3 border-gray-300 sm:w-40 md:w-56 lg:w-56">
-                                <h1 className='text-6xl font-mono text-gray-400'>10+</h1>
+                                <h1 className='num text-6xl font-mono text-gray-400' data-val={projectDone}>0</h1>
                                 <p className="aboutMe_text">Project Done</p>
                             </div>
                             <div className="text-center pb-3 border-gray-300 sm:w-40 md:w-56 lg:w-56">
-                                <h1 className='text-6xl font-mono text-gray-400'>1+</h1>
+                                <h1 className='num text-6xl font-mono text-gray-400' data-val={award}>0</h1>
                                 <p className="aboutMe_text">Get Award</p>
                             </div>
                         </div>
@@ -288,7 +292,7 @@ export default function HomePage(){
                             </div>
                             <div className="ml-2">
                                 <h2 className="text-2xl font-semibold font-sans">UI/UX</h2>
-                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">My proficiency in UI/UX design allows me to create captivating and intuitive user interfaces that enhance the overall user experience.</p>
                             </div>
                         </div>
                         <div className='flex m-4'>
@@ -297,7 +301,7 @@ export default function HomePage(){
                             </div>
                             <div className="ml-2">
                                 <h2 className="text-2xl font-semibold font-sans">Frontend Developer</h2>
-                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">As a frontend developer, I leverage my expertise in HTML, CSS, and JavaScript frameworks such as React.js to bring designs to life.</p>
                             </div>
                         </div>
                         <div className='flex m-4'>
@@ -306,7 +310,7 @@ export default function HomePage(){
                             </div>
                             <div className="ml-2">
                                 <h2 className="text-2xl font-semibold font-sans">Backend Developer</h2>
-                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">In backend development, I specialize in building robust and scalable server-side applications using languages like Java, Python, or Node js, along with frameworks such as Springboot, Flask, or Express js.</p>
                             </div>
                         </div>
                         <div className='flex m-4'>
@@ -315,7 +319,7 @@ export default function HomePage(){
                             </div>
                             <div className="ml-2">
                                 <h2 className="text-2xl font-semibold font-sans">Mobile App Developer</h2>
-                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">In the realm of mobile app development, I excel in creating native or cross-platform applications for iOS and Android using frameworks like React Native.</p>
                             </div>
                         </div>
                         <div className='flex m-4'>
@@ -324,7 +328,7 @@ export default function HomePage(){
                             </div>
                             <div className="ml-2">
                                 <h2 className="text-2xl font-semibold font-sans">Data Analysis</h2>
-                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                <p className="md:w-3/4 lg:w-3/4 mt-2 text-lg">With a strong analytical mindset and proficiency in tools like Pandas, SQL, I specialize in manipulating and giving insights from complex datasets. </p>
                             </div>
                         </div>
                     </div>
@@ -349,7 +353,7 @@ export default function HomePage(){
                                     <p className="bg-green-400/95 w-fit pl-3 pr-3 rounded text-white font-thin">2023 - 2024</p>
                                     <p className="text-xl font-semibold mt-2">Software Engineering</p>
                                     <p className="text-red-500 text-lg mt-2">Semicolon Africa</p>
-                                    <p className="text-lg mt-4">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                    <p className="text-lg mt-4">A year intensed course as Software Engineering in Semicolon.Africa and Knowledge gained are:<span className='font-semibold'> Design Thinking, Critical Thinking.</span> <br/><span className="font-semibold"> Backend Languages - </span>Java, Node js, Python. <br/><span className="font-semibold">Frontend Languages - </span>HTML & CSS, Javascipt,Tailwind CSS.  <br/> <span className="font-semibold">Frameworks - </span>React js, Spring Boot, Flask, FlaskApi, Django, Next js.  </p>
                                 </div>
                             </div>
                             <div>
@@ -357,7 +361,7 @@ export default function HomePage(){
                                     <p className="bg-green-400/95 w-fit pl-3 pr-3 rounded text-white font-thin">2019 - 2022</p>
                                     <p className="text-xl font-semibold mt-2">Business Administration and Management</p>
                                     <p className="text-red-500 text-lg mt-2">Institution of Management and Technology</p>
-                                    <p className="text-lg mt-4">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                    <p className="text-lg mt-4">Graduated as a National Diploma in Business Administration and Management with  a <span className="font-semibold">CGPA : 2.95</span> upper class</p>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +373,7 @@ export default function HomePage(){
                                     <p className="bg-green-400/95 w-fit pl-3 pr-3 rounded text-white font-thin">Jan 2024 - Mar 2024</p>
                                     <p className="text-xl font-semibold mt-2">Full Stack Developer</p>
                                     <p className="text-red-500 text-lg mt-2">Cyber Buddies</p>
-                                    <p className="text-lg mt-4">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                    <p className="text-lg mt-4">As a Full Stack Developer working with Cyber Buddies i was repsonsible for the robust software functionality, Proficient in technologies like HTML, CSS, Javascripts and the server side like Python.</p>
                                 </div>
                             </div>
                             <div>
@@ -377,7 +381,7 @@ export default function HomePage(){
                                     <p className="bg-green-400/95 w-fit pl-3 pr-3 rounded text-white font-thin">Oct 2023 - Jan 2024</p>
                                     <p className="text-xl font-semibold mt-2">Software Engineering - Capstone Project</p>
                                     <p className="text-red-500 text-lg mt-2">Semicolon Africa</p>
-                                    <p className="text-lg mt-4">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
+                                    <p className="text-lg mt-4">Create BLUMA, an online community platform solely for promoting Cultural Heritage in Nigeria and in Africa at Large. Creating awareness for people in diaspora of their cultural value and history. Developed with Java( Spring Boot), Java Script, React js, HTML, Tailwind Css.</p>
                                 </div>
                             </div>
                         </div>
@@ -486,7 +490,7 @@ export default function HomePage(){
                     </div>
                     <div className="flex justify-center">
                         <div className="border-2 border-gray-200 hover:bg-slate-500 hover:text-white transition-all p-3 w-48 rounded-full flex justify-center cursor-pointer mt-12">
-                            <button className='mr-3 text-gray-400 hover:bg-slate-500 hover:text-white transition-all'>Download CV</button>
+                            <button className='mr-3 text-gray-400 hover:bg-slate-500 hover:text-white transition-all' onClick={() => {downloadResume(resumeLink)}}>Download CV</button>
                             <img className='w-4 h-4 mt-1' src={download} alt="Download CV"></img>
                         </div>
                     </div>
@@ -524,15 +528,76 @@ export default function HomePage(){
                             <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl resize-none flex-none">
                                 <div className="flex">
                                     <div className="w-20 h-20 overflow-hidden rounded-full">
-                                        <img src={profile} alt="First Slide"></img>
+                                        <img src={ChefGibbs} alt="First Slide"></img>
                                     </div>
                                     <div className="m-3">
-                                        <p className="font-semibold">Retnaa Dayok</p>
-                                        <p className='text-gray-500/85'>Software Engineer from Nigeria</p>
+                                        <p className="font-semibold">Gbolabo Gibbs Adebakin</p>
+                                        <p className='text-gray-500/85'>Vice President - Culinary Arts Practitioners Association Of Nigeria</p>
                                     </div>
                                 </div>
                                 <div className="mt-4">
-                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et."</p>
+                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Before John embarked on his Software Engineer career, he has always been a goal getter attentive to details and his known for his problem solving skills. He brought his expectional skills to the Hospitality field and made name for him self."</p>
+                                </div>
+                                <div className="flex mt-5">
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                </div>
+                            </div>
+                            <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl flex-none">
+                                <div className="flex">
+                                    <div className="w-20 h-20 overflow-hidden rounded-full">
+                                        <img src={RetnaaDayok} alt="First Slide"></img>
+                                    </div>
+                                    <div className="m-3">
+                                        <p className="font-semibold">Retnaa Dayok Maxwell</p>
+                                        <p className='text-gray-500/85'>Software Engineer at Semicolon Africa</p>
+                                    </div>
+                                </div>
+                                <div className="mt-4">
+                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"John is a talented full-stack developer who consistently delivers high-quality work. He have a deep understanding of modern web technologies and are adept at turning complex requirements into elegant solutions. His commitment to meeting deadlines and his  collaborative approach make him a valuable asset to any development team"</p>
+                                </div>
+                                <div className="flex mt-5">
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                </div>
+                            </div>
+                            <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl flex-none">
+                                <div className="flex">
+                                    <div className="w-20 h-20 overflow-hidden rounded-full">
+                                        <img src={adeyemi} alt="First Slide"></img>
+                                    </div>
+                                    <div className="m-3">
+                                        <p className="font-semibold">Adetoyinbo Adeyemi</p>
+                                        <p className='text-gray-500/85'>Creative Software Engineer, Creative Director at Plecini</p>
+                                    </div>
+                                </div>
+                                <div className="mt-4">
+                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"I had the pleasure of collaborating with John on a challenging web development project, and I couldn't be happier with the results. His ability to juggle multiple tasks while maintaining a high level of attention to detail was impressive. He is not only skilled technically but also great communicators, always keeping stakeholders informed and involved throughout the process"</p>
+                                </div>
+                                <div className="flex mt-5">
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
+                                </div>
+                            </div>
+                            <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl flex-none">
+                                <div className="flex">
+                                    <div className="w-20 h-20 overflow-hidden rounded-full">
+                                        <img src={timi} alt="First Slide"></img>
+                                    </div>
+                                    <div className="m-3">
+                                        <p className="font-semibold">Bamgbose Babatunde Timileyin</p>
+                                        <p className='text-gray-500/85'>Snr. Software Engineer</p>
+                                    </div>
+                                </div>
+                                <div className="mt-4">
+                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"I highly recommend John for any web development project. His expertise in full-stack development, combined with his professionalism and work ethic, make him a valuable partner. He consistently delivered results that exceeded my expectations, and his proactive approach to problem-solving helped us overcome obstacles and achieve our project goals. It was a pleasure working with Ebube John Enyi, and I would not hesitate to engage his services again."</p>
                                 </div>
                                 <div className="flex mt-5">
                                     <img className="w-4 m-1" src={stars} alt="Stars"></img>
@@ -547,72 +612,12 @@ export default function HomePage(){
                                         <img src={profile} alt="First Slide"></img>
                                     </div>
                                     <div className="m-3">
-                                        <p className="font-semibold">Retnaa Dayok</p>
-                                        <p className='text-gray-500/85'>Software Engineer from Nigeria</p>
+                                        <p className="font-semibold">Akintayo Afolabi</p>
+                                        <p className='text-gray-500/85'>UI/UX designer</p>
                                     </div>
                                 </div>
                                 <div className="mt-4">
-                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et."</p>
-                                </div>
-                                <div className="flex mt-5">
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                </div>
-                            </div>
-                            <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl flex-none">
-                                <div className="flex">
-                                    <div className="w-20 h-20 overflow-hidden rounded-full">
-                                        <img src={profile} alt="First Slide"></img>
-                                    </div>
-                                    <div className="m-3">
-                                        <p className="font-semibold">Retnaa Dayok</p>
-                                        <p className='text-gray-500/85'>Software Engineer from Nigeria</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4">
-                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et."</p>
-                                </div>
-                                <div className="flex mt-5">
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                </div>
-                            </div>
-                            <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl flex-none">
-                                <div className="flex">
-                                    <div className="w-20 h-20 overflow-hidden rounded-full">
-                                        <img src={profile} alt="First Slide"></img>
-                                    </div>
-                                    <div className="m-3">
-                                        <p className="font-semibold">Retnaa Dayok</p>
-                                        <p className='text-gray-500/85'>Software Engineer from Nigeria</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4">
-                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et."</p>
-                                </div>
-                                <div className="flex mt-5">
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                    <img className="w-4 m-1" src={stars} alt="Stars"></img>
-                                </div>
-                            </div>
-                            <div className="md:m-4 lg:m-4 bg-gray-100/65 p-5 sm:w-full md:w-45 lg:w-45 rounded-xl flex-none">
-                                <div className="flex">
-                                    <div className="w-20 h-20 overflow-hidden rounded-full">
-                                        <img src={profile} alt="First Slide"></img>
-                                    </div>
-                                    <div className="m-3">
-                                        <p className="font-semibold">Retnaa Dayok</p>
-                                        <p className='text-gray-500/85'>Software Engineer from Nigeria</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4">
-                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.Lisque persius interesset his et."</p>
+                                    <p className="text-lg sm:w-96 md:w-fit lg:w-fit">"Working with Ebube John Enyi was a seamless experience from start to finish. He demonstrated a strong grasp of both front-end and back-end development concepts and were able to quickly adapt to changing requirements. He dedication to writing clean, maintainable code and his willingness to go the extra mile to ensure client satisfaction set him apart. I look forward to collaborating with john again in the future."</p>
                                 </div>
                                 <div className="flex mt-5">
                                     <img className="w-4 m-1" src={stars} alt="Stars"></img>
