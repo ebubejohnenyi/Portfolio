@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.overlay{
+  @apply absolute bg-black/50 top-0 right-0 left-0 bottom-0 h-screen
+}
+.middle_text{
+  @apply text-white sm:text-4xl sm:flex sm:justify-center md:text-6xl md:mb-8 md:mt-8 lg:mb-8 lg:mt-8  lg:text-6xl font-bold font-sans p-2 block text-center md:whitespace-nowrap lg:whitespace-nowrap overflow-hidden
+}
+.container .sec_middle_text{
+  @apply text-white text-6xl font-bold font-mono mt-8 mb-6 relative border-l-8
+}
+.btn{
+  @apply border border-2 border-green-400 text-green-400 font-semibold w-36 h-14 rounded-full text-center mt-8
+}
+.btn:hover{
+  @apply bg-green-400/85 transition-all text-white
+}
+.side_bar_text{
+  @apply text-xl mt-4 text-white cursor-pointer transition-all
+}
+.side_bar_text:hover{
+  @apply text-xl mt-4 text-green-600 cursor-pointer 
+}
+.name{
+  @apply sm:text-white sm:text-2xl md:text-white font-sans md:text-2xl font-bold lg:mt-2 lg:text-white lg:text-2xl md:mt-2
+}
+.label_name{
+  @apply font-semibold font-sans text-lg text-gray-500 m-1
+}
+.aboutMe_text{
+  @apply text-gray-500 text-xl mt-2
+}
+@layer keyframes {
+  /* Define the keyframes for the slide in down animation */
+  @keyframes slideInDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+.send_message:hover{
+  @apply bg-green-400/85 transition-all 
+}
